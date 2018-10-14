@@ -1,64 +1,57 @@
-.PHONY: clean data requirements
+.PHONY: test cover data clean lint create_env
 
 #################################################################################
 # GLOBALS                                                                       #
 #################################################################################
 
-PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-PROJECT_NAME = {{ cookiecutter.repo_name }}
-PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
+REPO_NAME = {{ cookiecutter.repo_name }}
+EXCLUDES_LINT = --exclude=bin/,src/rebuydsutils/,docs/conf.py
+EXCLUDES_PYTEST = --ignore src/rebuydsutils
+SHELL=/bin/bash
 
 ifeq (,$(shell which conda))
-HAS_CONDA=False
-else
-HAS_CONDA=True
+	$(error conda must be installed)
 endif
 
-#################################################################################
-# COMMANDS                                                                      #
-#################################################################################
-
-## Install Python Dependencies
-requirements: test_environment
-	pip install -U pip setuptools wheel
-	pip install -r requirements.txt
-
-## Make Dataset
-data: requirements
-	$(PYTHON_INTERPRETER) src/data/make_dataset.py
-
-## Delete all compiled Python files
-clean:
-	find . -type f -name "*.py[co]" -delete
-	find . -type d -name "__pycache__" -delete
-
-## Set up python interpreter environment
-create_environment:
-ifeq (True,$(HAS_CONDA))
-		@echo ">>> Detected conda, creating conda environment."
-ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
-	conda create --name $(PROJECT_NAME) python=3
+# Define utility variable to help calling Python from the virtual environment
+ifeq ($(CONDA_DEFAULT_ENV),$(REPO_NAME))
+    ACTIVATE_ENV := true
 else
-	conda create --name $(PROJECT_NAME) python=2.7
-endif
-		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
-else
-	@pip install -q virtualenv virtualenvwrapper
-	@echo ">>> Installing virtualenvwrapper if not already intalled.\nMake sure the following lines are in shell startup file\n\
-	export WORKON_HOME=$$HOME/.virtualenvs\nexport PROJECT_HOME=$$HOME/Devel\nsource /usr/local/bin/virtualenvwrapper.sh\n"
-	@bash -c "source `which virtualenvwrapper.sh`;mkvirtualenv $(PROJECT_NAME) --python=$(PYTHON_INTERPRETER)"
-	@echo ">>> New virtualenv created. Activate with:\nworkon $(PROJECT_NAME)"
+    ACTIVATE_ENV := source activate $(REPO_NAME)
 endif
 
-## Test python environment is setup correctly
-test_environment:
-	$(PYTHON_INTERPRETER) src/tools/test_environment.py
+# Execute python related functionalities from within the project's environment
+define execute_in_env
+	$(ACTIVATE_ENV) && $1
+endef
 
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
 
+## Run pytest on the project
+test:
+	$(call execute_in_env, pytest $(EXCLUDES_PYTEST))
 
+## Run coverage test on the project
+cover:
+	$(call execute_in_env, pytest --cov=. tests/ $(EXCLUDES_PYTEST))
+
+## Make Dataset
+data:
+	$(call execute_in_env, python src/data/make_dataset.py)
+
+## Delete all compiled Python files
+clean:
+	find . -name "*.pyc" -exec rm {} \;
+
+## Lint using flake8; Excluding $EXCLUDES_LINT
+lint:
+	$(call execute_in_env, flake8  $(EXCLUDES_LINT) .)
+
+## Set up python interpreter environment
+create_env:
+	conda env create -n $(REPO_NAME) -f environment.yml
 
 #################################################################################
 # Self Documenting Commands                                                     #

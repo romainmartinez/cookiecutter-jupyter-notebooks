@@ -1,10 +1,8 @@
-from setuptools import find_packages, setup
+from setuptools import setup
 
-setup(
-    name='src',
-    packages=find_packages(),
-    version='0.1.0',
-    description='{{ cookiecutter.description }}',
-    author='{{ cookiecutter.author_name }}',
-    license='{% if cookiecutter.open_source_license == 'MIT' %}MIT{% elif cookiecutter.open_source_license == 'BSD-3-Clause' %}BSD-3{% endif %}',
-)
+setup(name='{{ cookiecutter.repo_name }}',
+      version='POC',
+      url='https://github.com/{{ cookiecutter.author_name }}/{{ cookiecutter.repo_name }}.git',
+      author='{{ cookiecutter.author_name }}',
+      packages=['src'],
+      zip_safe=False)
