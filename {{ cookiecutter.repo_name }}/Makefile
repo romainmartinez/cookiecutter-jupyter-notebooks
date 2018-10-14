@@ -8,6 +8,7 @@ REPO_NAME = {{ cookiecutter.repo_name }}
 EXCLUDES_LINT = --exclude=bin/,src/rebuydsutils/,docs/conf.py
 EXCLUDES_PYTEST = --ignore src/rebuydsutils
 SHELL=/bin/bash
+NOTEBOOKS_TOOLS = './notebooks/tools/'
 
 ifeq (,$(shell which conda))
 	$(error conda must be installed)
@@ -28,6 +29,10 @@ endef
 #################################################################################
 # PROJECT RULES                                                                 #
 #################################################################################
+
+## Update notebooks (repo info, navigation bar, index)
+update_notebooks:
+	$(call execute_in_env, python $(NOTEBOOKS_TOOLS)generate_contents.py)
 
 ## Run pytest on the project
 test:

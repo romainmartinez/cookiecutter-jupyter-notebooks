@@ -4,6 +4,7 @@ channels:
 dependencies:
 - python={{ cookiecutter.python_interpreter }}
 - nb_conda_kernels
+- pyyaml
 - flake8
 - pytest
 - pytest-cov
