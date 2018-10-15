@@ -108,9 +108,9 @@ class Navigation(NoteBooks):
                 nb.cells.insert(1, new_markdown_cell(source=navbar))
 
             if self.is_comment(nb.cells[-1], self.comment):
-                nb.cells[-1].source = f"<br>\n{navbar}"
+                nb.cells[-1].source = navbar
             else:
-                nb.cells.append(new_markdown_cell(source=f"<br>\n{navbar}"))
+                nb.cells.append(new_markdown_cell(source=navbar))
             nbformat.write(nb, str(nb_name))
         print('\n')
 
