@@ -32,7 +32,8 @@ endef
 
 ## Update notebooks (repo info, navigation bar, index)
 update_notebooks:
-	$(call execute_in_env, python $(NOTEBOOKS_TOOLS)generate_contents.py)
+	cd notebooks;\
+	$(call execute_in_env, python update_notebooks.py)
 
 ## Run pytest on the project
 test:

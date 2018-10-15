@@ -53,7 +53,7 @@ class KernelSpec(NoteBooks):
 class Index(NoteBooks):
     def __init__(self, nb_dir, config_file):
         super().__init__(nb_dir, config_file)
-        self.comment = "<!--INDEX_COMMENT-->\n"
+        self.comment = "<!--INDEX_COMMENT-->\n## Table of Contents\n"
 
     def update(self):
         nb_name = self.nb_dir / 'Index.ipynb'
@@ -71,11 +71,12 @@ class Index(NoteBooks):
         print('\n')
 
     def gen_contents(self, directory=None):
+        # TODO : HERE
         for nb in self.iter_notebooks():
             if directory:
                 nb_url = Path(directory) / nb.stem
             else:
-                nb_url = nb.resolve()
+                nb_url = nb.parts[-1]
             chapter, section, title = self.reg.match(nb.stem).groups()
             title = self.get_notebook_title(nb)
             if section == '00':
