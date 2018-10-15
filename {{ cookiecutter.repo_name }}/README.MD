@@ -2,45 +2,25 @@
 
 {{cookiecutter.description}}
 
-## Project Index
+## How to Use this repo
+- By running the code using the Jupyter notebooks available in this repository's [notebooks](./notebooks) directory.
+- By launching executable versions of these notebooks using binder: [![Binder](https://mybinder.org/badge.svg)](binder_link in config)
+- By launching executable versions of these notebooks using Google Colab: [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](colab_link in config)
+- By reading the online (non-executable) version of the notebooks using nbviewer: [![Nbviewer](https://raw.github.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg?sanitize=true)](nbviewer_link in config)
 
+## About
+See [Index.ipynb](https://nbviewer.jupyter.org/github/pyomeca/tutorials/blob/master/notebooks/Index.ipynb) for an index of the notebooks available to accompany the text.
 
+## Software
+The packages we used to run the code in these tutorials are listed in [environment.yml](environment.yml).
 
-##  Project Organization
+To create a stand-alone environment named `{{cookiecutter.project_name}}` with Python 3 and all the required package versions, run the following:
 
+```bash
+$ conda env create -n {{cookiecutter.project_name}} -f environment.yml
 ```
-.
-├── data
-│   ├── processed            <- The final, canonical data sets for modeling
-│   └── raw                  <- The original, immutable data dump
-├── models                   <- Trained and serialized models, model predictions, or model summaries
-├── notebooks                <- Jupyter notebooks
-├── reports                  <- Generated analysis as HTML, PDF, LaTeX, etc
-│   └── figures              <- Generated graphics and figures to be used in reporting
-├── src                      <- Source code for use in this project
-│   ├── data                 <- Scripts to download or generate data
-│   │   ├── __init__.py
-│   │   └── make_dataset.py
-│   ├── features             <- Scripts to turn raw data into features for modeling
-│   │   ├── build_features.py
-│   │   └── __init__.py
-│   ├── models               <- Scripts to train models
-│   │   ├── __init__.py
-│   │   ├── predict_model.py
-│   │   └── train_model.py
-│   ├── visualization        <- Scripts to create exploratory and results oriented visualizations
-│   │   ├── __init__.py
-│   │   └── visualize.py
-│   └── __init__.py
-├── config.yml
-├── environment.yml          <- The requirements file for reproducing the analysis environment
-├── LICENSE
-├── Makefile                 <- Makefile with commands like `make create_env` or `make data`
-├── README.md                <- The top-level README for developers using this project
-└── setup.py                 <- makes project pip installable (pip install -e .) so src can be imported
 
-```
+You can read more about using conda environments in the [Managing Environments](http://conda.pydata.org/docs/using/envs.html) section of the conda documentation.
 
 ---
-
 Project based on the romainmartinez's [cookiecutter jupyter notebooks template](https://github.com/romainmartinez/cookiecutter-jupyter-notebooks).

@@ -1,4 +1,4 @@
-repo_name: '{{ cookiecutter.repo_name }}'
+repo_name: '{{cookiecutter.repo_name}}'
 repo_info: >
   # Effective computation in Biomechanics
 
@@ -8,6 +8,6 @@ repo_info: >
 
   <img src="https://raw.github.com/pyomeca/design/master/logo/logo_cropped.svg?sanitize=true" width="100px" align="left"/>
 nbviewer_link:
-  'http://nbviewer.jupyter.org/github/{{ cookiecutter.author_name }}/{{ cookiecutter.repo_name }}/tree/master/notebooks/'
+  'http://nbviewer.jupyter.org/github/{{cookiecutter.author_name}}/{{cookiecutter.repo_name}}/tree/master/notebooks/'
 colab_link:
-  'https://colab.research.google.com/github/{{ cookiecutter.author_name }}/{{ cookiecutter.repo_name }}/blob/master/notebooks'
+  'https://colab.research.google.com/github/{{cookiecutter.author_name}}/{{cookiecutter.repo_name}}/blob/master/notebooks'
