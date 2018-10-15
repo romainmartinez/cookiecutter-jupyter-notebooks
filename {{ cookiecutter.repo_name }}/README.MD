@@ -9,7 +9,7 @@
 - By reading the online (non-executable) version of the notebooks using nbviewer: [![Nbviewer](https://raw.github.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg?sanitize=true)](nbviewer_link in config)
 
 ## About
-See [Index.ipynb](https://nbviewer.jupyter.org/github/pyomeca/tutorials/blob/master/notebooks/Index.ipynb) for an index of the notebooks available to accompany the text.
+See [Index.ipynb](nbviewer_link in config) for an index of the notebooks available to accompany the text.
 
 ## Software
 The packages we used to run the code in these tutorials are listed in [environment.yml](environment.yml).

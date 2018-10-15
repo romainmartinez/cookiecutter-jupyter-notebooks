@@ -1,10 +1,10 @@
+import itertools
 import re
-import yaml
 from operator import itemgetter
 from pathlib import Path
-import itertools
 
 import nbformat
+import yaml
 from nbformat.v4.nbbase import new_markdown_cell
 
 
@@ -96,25 +96,19 @@ class Navigation(NoteBooks):
         self.contents = "| [Contents](Index.ipynb) |"
         self.next_template = " [{title}]({url}) >"
 
-        self.colab = """\n
-<a href="{colab_link}/{notebook_filename}">\
-<img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" \
-alt="Open in Colab" title="Open and Execute in Google Colaboratory"></a>
-"""
-
     def update(self):
         for nb_name, navbar in self.iter_navbars(self.comment):
             nb = nbformat.read(str(nb_name), as_version=4)
 
             if self.is_comment(nb.cells[1], self.comment):
                 print(f"- amending navigation for {nb_name.stem}")
-                nb.cells[1].source = f"{navbar}\n<br>\n\n---"
+                nb.cells[1].source = navbar
             else:
                 print(f"- inserting navigation for {nb_name.stem}")
-                nb.cells.insert(1, new_markdown_cell(source=f"{navbar}\n<br>\n\n---"))
+                nb.cells.insert(1, new_markdown_cell(source=navbar))
 
             if self.is_comment(nb.cells[-1], self.comment):
-                nb.cells[-1].source = navbar
+                nb.cells[-1].source = f"<br>\n{navbar}"
             else:
                 nb.cells.append(new_markdown_cell(source=navbar))
             nbformat.write(nb, str(nb_name))
@@ -130,9 +124,6 @@ alt="Open in Colab" title="Open and Execute in Google Colaboratory"></a>
             if next_nb:
                 navbar += self.next_template.format(title=self.get_notebook_title(next_nb),
                                                     url=next_nb.parts[-1])
-
-            colab_link = self.get_config(self.config_file, keys=['colab_link'])
-            navbar += self.colab.format(colab_link=colab_link, notebook_filename=nb.parts[-1])
             yield nb, navbar
 
     @staticmethod
@@ -178,7 +169,3 @@ if __name__ == '__main__':
     # 4. update index
     index = Index(NB_DIR, CONFIG_FILE)
     index.update()
-
-    print('if you want to put a ToC in `README.md`:')
-    nbviewer = index.get_config(CONFIG_FILE, keys=['nbviewer_link'])
-    print(index.print_contents(nbviewer))

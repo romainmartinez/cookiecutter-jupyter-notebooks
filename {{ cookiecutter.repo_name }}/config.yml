@@ -1,13 +1,11 @@
 repo_name: '{{cookiecutter.repo_name}}'
 repo_info: >
-  # Effective computation in Biomechanics
+  # Main title
 
-  ## with [pyomeca](https://github.com/pyomeca/pyomeca)
+  ## Subtitle
 
-  #### Romain Martinez (martinez.staps@gmail.com | [GitHub](https://github.com/romainmartinez))
+  Author infos
 
-  <img src="https://raw.github.com/pyomeca/design/master/logo/logo_cropped.svg?sanitize=true" width="100px" align="left"/>
-nbviewer_link:
-  'http://nbviewer.jupyter.org/github/{{cookiecutter.author_name}}/{{cookiecutter.repo_name}}/tree/master/notebooks/'
-colab_link:
-  'https://colab.research.google.com/github/{{cookiecutter.author_name}}/{{cookiecutter.repo_name}}/blob/master/notebooks'
+  [![Binder](https://mybinder.org/badge.svg)](google.fr)
+  [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](google.fr)
+  [![Nbviewer](https://raw.github.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg?sanitize=true)](https://mybinder.org/badge.svg)](google.fr)
