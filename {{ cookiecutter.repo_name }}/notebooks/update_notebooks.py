@@ -60,12 +60,13 @@ class Index(NoteBooks):
 
         nb = nbformat.read(str(nb_name), as_version=4)
 
+        md_cell = f"{self.comment}{self.print_contents()}"
+
         if self.is_comment(nb.cells[-1], self.comment):
             print(f'- amending index for {nb_name.stem}')
-            nb.cells[1].source = self.print_contents()
+            nb.cells[1].source = md_cell
         else:
             print(f'- inserting index for {nb_name.stem}')
-            md_cell = f"{self.comment}{self.print_contents()}"
             nb.cells.append(new_markdown_cell(md_cell))
         nbformat.write(nb, str(nb_name))
         print('\n')
