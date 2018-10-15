@@ -1,3 +1,5 @@
+# TODO: please update badge link in config.yml and readme
+
 # {{cookiecutter.project_name}}
 
 {{cookiecutter.description}}
