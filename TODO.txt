@@ -1,4 +1,0 @@
-#TODO
-
-- README.md
-- template docs?
