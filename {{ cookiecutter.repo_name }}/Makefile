@@ -58,6 +58,7 @@ lint:
 ## Set up python interpreter environment
 create_env:
 	conda env create -n $(REPO_NAME) -f environment.yml
+	rm -rf *.egg-info
 
 #################################################################################
 # Self Documenting Commands                                                     #

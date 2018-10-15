@@ -100,7 +100,7 @@ class Navigation(NoteBooks):
 <a href="{colab_link}/{notebook_filename}">\
 <img align="left" src="https://colab.research.google.com/assets/colab-badge.svg" \
 alt="Open in Colab" title="Open and Execute in Google Colaboratory"></a>
-                """
+"""
 
     def update(self):
         for nb_name, navbar in self.iter_navbars(self.comment):
@@ -108,10 +108,10 @@ alt="Open in Colab" title="Open and Execute in Google Colaboratory"></a>
 
             if self.is_comment(nb.cells[1], self.comment):
                 print(f"- amending navigation for {nb_name.stem}")
-                nb.cells[1].source = navbar
+                nb.cells[1].source = f"{navbar}\n<br>\n\n---"
             else:
                 print(f"- inserting navigation for {nb_name.stem}")
-                nb.cells.insert(1, new_markdown_cell(source=navbar))
+                nb.cells.insert(1, new_markdown_cell(source=f"{navbar}\n<br>\n\n---"))
 
             if self.is_comment(nb.cells[-1], self.comment):
                 nb.cells[-1].source = navbar
