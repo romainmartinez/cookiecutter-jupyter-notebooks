@@ -8,7 +8,6 @@ REPO_NAME = {{ cookiecutter.repo_name }}
 EXCLUDES_LINT = --exclude=bin/,src/rebuydsutils/,docs/conf.py
 EXCLUDES_PYTEST = --ignore src/rebuydsutils
 SHELL=/bin/bash
-NOTEBOOKS_TOOLS = './notebooks/tools/'
 
 ifeq (,$(shell which conda))
 	$(error conda must be installed)
