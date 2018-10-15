@@ -7,7 +7,7 @@
 
 
 ##  Project Organization
-- The top-level README for developers using this project.
+
 ```
 .
 ├── data
