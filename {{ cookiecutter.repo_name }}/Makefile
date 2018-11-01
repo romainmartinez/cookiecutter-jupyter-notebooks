@@ -1,10 +1,10 @@
-.PHONY: test cover data clean lint create_env
+.PHONY: test cover data clean lint create_env export_nb_to_html update_notebooks
 
 #################################################################################
 # GLOBALS                                                                       #
 #################################################################################
 
-REPO_NAME = {{ cookiecutter.repo_name }}
+REPO_NAME = tutorials
 EXCLUDES_LINT = --exclude=bin/,src/rebuydsutils/,docs/conf.py
 EXCLUDES_PYTEST = --ignore src/rebuydsutils
 SHELL=/bin/bash
@@ -33,6 +33,12 @@ endef
 update_notebooks:
 	cd notebooks;\
 	$(call execute_in_env, python update_notebooks.py)
+
+## Export all notebooks in ./notebooks to html
+export_nb_to_html:
+	rm -rf reports/nb_html;\
+	jupyter nbconvert --to html notebooks/*.ipynb --output-dir reports/nb_html/;\
+	sed -i -- 's/ipynb/html/g' reports/nb_html/*
 
 ## Run pytest on the project
 test:
