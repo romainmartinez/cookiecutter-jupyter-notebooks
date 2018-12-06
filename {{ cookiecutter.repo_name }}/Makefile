@@ -4,7 +4,7 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-REPO_NAME = tutorials
+REPO_NAME = {{cookiecutter.project_name}}
 EXCLUDES_LINT = --exclude=bin/,src/rebuydsutils/,docs/conf.py
 EXCLUDES_PYTEST = --ignore src/rebuydsutils
 SHELL=/bin/bash
